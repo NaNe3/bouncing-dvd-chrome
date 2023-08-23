@@ -1,0 +1,18 @@
+html, body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+canvas {
+    background-color: #f1f1f1;
+}
+
+.set {
+    padding-left: 20px;
+}
+
+#options {display:block;position:absolute;bottom:40px;right:30px;color: white;}
+#features {display:block;position:absolute;bottom:20px;right:30px;color: white;}
+#back {display:block; text-align: left; color: white;}

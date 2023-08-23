@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bouncing DVD - New Tab</title>
+    <link href = "style.css" rel = "stylesheet" type = "text/css">
+    <link rel="icon" href="icon/dvd.png" sizes="16x16" type="image/png">
+    <script src="script.js"></script>
+</head>
+<body style="background-color: black;">
+    
+    <div id="options" style="margin: auto; padding: 10px;">
+        
+        <p style="font: 18px; color: white">Logo Color</p>
+        <div id="speed" class="set">
+            <select id="color">
+                <option value="random">Random</option>
+                <option value="Blue">Blue</option>
+                <option value="LBlue">Light Blue</option>
+                <option value="Red">Red</option>
+                <option value="Orange">Orange</option>
+                <option value="Yellow">Yellow</option>
+                <option value="Green">Green</option>
+                <option value="Pink">Pink</option>
+                <option value="White">White</option>
+            </select>
+        </div>
+        
+        <p style="font: 18px; color: white">Logo Speed</p>
+        <div id="speed" class="set">
+            <input id="slow" name="speed" type="radio"><label>slow</label><br>
+            <input id="medium" name="speed" type="radio"><label>medium</label><br>
+            <input id="fast" name="speed" type="radio"><label>fast</label>
+        </div>
+        
+        <p style="font: 18px; color: white">Refresh Rate</p>
+        <div id="rate" class="set">
+            <input id="classic" name="rate" type="radio"><label>classic (25 fps)</label><br>
+            <input id="smooth" name="rate" type="radio"><label>smooth (50 fps)</label>
+        </div>
+        
+        <p style="font: 18px; color: white">Statistics</p>
+        <div id="stats" class="set">
+            <input id="on" name="stats" type="radio"><label>on</label><br>
+            <input id="off" name="stats" type="radio"><label>off</label>
+        </div><br>
+        <a id="back" href="index.html">Back to Screen</a>
+    </div>
+    
+    <script src="opt.js"></script>
+    
+</body>
+</html>
