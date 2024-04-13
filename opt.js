@@ -3,13 +3,11 @@ if (localStorage.getItem("speed") == null) {
     localStorage.setItem("speed", "medium");
 }
 if (localStorage.getItem("rate") == null) {
-    localStorage.setItem("rate", "classic");
+    localStorage.setItem("rate", "smooth");
 }
 if (localStorage.getItem("stats") == null) {
     localStorage.setItem("stats", "on");
 }
-
-console.log(localStorage.getItem("speed") + " " + localStorage.getItem("rate") + " " + localStorage.getItem("stats"));
 
 //SET THE RADIO BUTTONS VALUES
 if (localStorage.getItem("speed") == "slow") {
@@ -78,4 +76,14 @@ document.getElementById("on").onclick = function () {
 }
 document.getElementById("off").onclick = function () {
     localStorage.setItem("stats", "off");
+}
+
+function teleport(e) {
+    if (e.innerHTML == "options") {
+        document.getElementById("settings-container").style.display = "block";
+        document.getElementById("selection-container").style.display = "none";
+    } else {
+        document.getElementById("settings-container").style.display = "none";
+        document.getElementById("selection-container").style.display = "block";
+    }
 }

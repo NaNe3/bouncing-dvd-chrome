@@ -12,7 +12,7 @@ window.onload = function() {
         localStorage.setItem("speed", "medium");
     }
     if (localStorage.getItem("rate") == null) {
-        localStorage.setItem("rate", "classic");
+        localStorage.setItem("rate", "smooth");
     }
     if (localStorage.getItem("stats") == null) {
         localStorage.setItem("stats", "on");
@@ -20,11 +20,14 @@ window.onload = function() {
     if (localStorage.getItem("color") == null) {
         localStorage.setItem("color", "Blue");
     }
+    if (localStorage.getItem("background-color") == null) {
+        localStorage.setItem("background-color", "black");
+    }
     startGame();
 }
 
 function createDvd(x, y) {
-    console.log(localStorage.getItem("color"));
+    let piece
     if (localStorage.getItem("color") == "random") {
         piece = new component(167, 167, dvds[Math.floor(Math.random() * dvds.length)], x-83, y-83, pieces.length);
     } else {
@@ -34,8 +37,10 @@ function createDvd(x, y) {
 }
 
 function startGame() {
-    createDvd(Math.floor(Math.random() * (window.innerWidth-334)+167), Math.floor(Math.random() * (window.innerHeight-334)+167), pieces.length);
-    //creates canvas and interval for game
+    const startX = Math.floor(Math.random() * (window.innerWidth-334)+167);
+    const startY = Math.floor(Math.random() * (window.innerHeight-334)+167);
+    createDvd(startX, startY, pieces.length);
+    
     myGameArea.start();
 }
 
@@ -44,7 +49,7 @@ var myGameArea = {
     start : function() {
         this.canvas.width = window.innerWidth;
         this.canvas.height = window.innerHeight;
-        this.canvas.onclick = function() {
+        this.canvas.onclick = function(event) {
             createDvd(event.x, event.y);
         }
         this.context = this.canvas.getContext("2d");
@@ -124,35 +129,21 @@ function component(width, height, image, x, y, id) {
         for (var i=0; i<pieces.length; i++) {
             if (this.id != pieces[i].id) {
                 if (this.y >= pieces[i].y && this.y <= pieces[i].y+167 || this.y+167 >= pieces[i].y && this.y+167 <= pieces[i].y+167) {
-                    if (this.x == pieces[i].x+167 && this.x+167 <= pieces[i].x+20 || this.x+167 >= pieces[i].x && this.x+167 <= pieces[i].x+20) { // && this.x <= pieces[i].x+8) {
+                    if (this.x == pieces[i].x+167 && this.x+167 <= pieces[i].x+20 || this.x+167 >= pieces[i].x && this.x+167 <= pieces[i].x+20) {
                         this.dirX = this.dirX * -1;
                         pieces[i].dirX = pieces[i].dirX * -1;
-                        console.log("xeeeeee");
                     }
                 }
                 if (this.x >= pieces[i].x && this.x <= pieces[i].x+167 || this.x+167 >= pieces[i].x && this.x+167 <= pieces[i].x+167) {
-                    if (this.y == pieces[i].y+167 && this.y+167 <= pieces[i].y+20 || this.y+167 >= pieces[i].y && this.y+167 <= pieces[i].y+20) {// && this.y <= pieces[i].y+8) {
+                    if (this.y == pieces[i].y+167 && this.y+167 <= pieces[i].y+20 || this.y+167 >= pieces[i].y && this.y+167 <= pieces[i].y+20) {
                         this.dirY = this.dirY * -1;
                         pieces[i].dirY = pieces[i].dirY * -1;
-                        console.log("yeee");
                     }
                 }
             }
         }
         
         
-        if (localStorage.getItem("stats") == "on") {
-            ctx.font = "14px Arial";
-            ctx.fillStyle = "white";
-            ctx.fillText("Wall Hits: " + this.wallHits, 20, window.innerHeight-65);
-            ctx.fillText("Corner Hits: " + this.cornerHits, 20, window.innerHeight-50);
-            if (this.results.length > 0) {
-                average = (this.results.reduce( function(total, num) { return total + num; } ))/this.results.length;
-                ctx.fillText("Avg Hits for Corner: " + average, 20, window.innerHeight-20);
-            } else {
-                ctx.fillText("Avg Hits for Corner: Calculating...",20,window.innerHeight-20);
-            }
-        }
         
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
@@ -165,11 +156,26 @@ function updateGameArea() {
     ctx = myGameArea.context;
     ctx.beginPath();
     ctx.rect(0, 0, window.innerWidth, window.innerHeight);
-    ctx.fillStyle = "black";
+    ctx.fillStyle = localStorage.getItem("background-color") ?? "black";
     ctx.fill();
     
     //logic and such for dvd icon
     for (var i=0; i<pieces.length; i++) {
         pieces[i].update();
+    }
+    if (localStorage.getItem("stats") == "on") {
+        ctx.font = "14px Arial";
+        ctx.fillStyle = "white";
+        const totalWallCollisions = pieces.map(dvd => dvd.wallHits).reduce((total, num) => total + num, 0);
+        const totalCornerCollisions = pieces.map(dvd => dvd.cornerHits).reduce((total, num) => total + num, 0);
+        ctx.fillText("Wall Hits: " + totalWallCollisions, 20, window.innerHeight-65);
+        ctx.fillText("Corner Hits: " + totalCornerCollisions, 20, window.innerHeight-50);
+
+        if (totalWallCollisions > 0) {
+            const average = totalCornerCollisions > 0 ? Math.floor(totalWallCollisions/totalCornerCollisions) : 0
+            ctx.fillText("Avg Hits for Corner: " + average, 20, window.innerHeight-35);
+        } else {
+            ctx.fillText("Avg Hits for Corner: maybe hit the wall first...", 20, window.innerHeight-35);
+        }
     }
 }

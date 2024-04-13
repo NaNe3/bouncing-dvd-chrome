@@ -13,6 +13,27 @@ canvas {
     padding-left: 20px;
 }
 
-#options {display:block;position:absolute;bottom:40px;right:30px;color: white;}
-#features {display:block;position:absolute;bottom:20px;right:30px;color: white;}
-#back {display:block; text-align: left; color: white;}
+a {
+    color: black;
+    border: 4px solid black;
+    cursor: pointer;
+    background-color: white;
+    padding: 10px 30px;
+    border-radius: 100px;
+    text-decoration: none;
+
+    display: block;
+    position: absolute;
+}
+
+#options {display:block;position:absolute;bottom:70px;right:30px;}
+#features {display:block;position:absolute;bottom:20px;right:30px;}
+#back {display:block; text-align: left; }
+
+#settings-container {
+    color: white;
+    display: block;
+    position: absolute;
+    bottom: 70px;
+    right: 30px;
+}
