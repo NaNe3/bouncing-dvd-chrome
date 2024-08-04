@@ -1,13 +1,72 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Bouncing DVD - New Tab</title>
-    <link href = "style.css" rel = "stylesheet" type = "text/css">
-    <link rel="icon" href="icon/dvd.png" sizes="16x16" type="image/png">
-    <script src="script.js"></script>
+	<link href="style.css" rel="stylesheet" type="text/css">
+	<link rel="icon" href="icon/dvd.png" sizes="16x16" type="image/png">
+	<script src="script.js"></script>
 </head>
+
 <body>
-    <a id="options" href="opt.html">options</a>
-    <a id="features" href="#">default landing</a>
+
+	<div id="selection-container" style="display: block;">
+		<a id="options" style="color: black;" onclick="teleport(this)">options</a>
+		<a id="disable-extension" style="color: black" href="#">default landing</a>
+	</div>
+	<div id="settings-container" style="display: none;">
+		<p style="font: 18px; color: black">Background Color</p>
+		<div id="background-color-container" class="set">
+			<select id="background-color">
+				<option value="random">Random</option>
+				<option value="blue">Blue</option>
+				<option value="lightblue">Light Blue</option>
+				<option value="red">Red</option>
+				<option value="orange">Orange</option>
+				<option value="yellow">Yellow</option>
+				<option value="green">Green</option>
+				<option value="pink">Pink</option>
+				<option value="white">White</option>
+			</select>
+		</div>
+
+		<p style="font: 18px; color: black">DVD Color</p>
+		<div id="speed" class="set">
+			<select id="color">
+				<option value="random">Random</option>
+				<option value="Blue">Blue</option>
+				<option value="LBlue">Light Blue</option>
+				<option value="Red">Red</option>
+				<option value="Orange">Orange</option>
+				<option value="Yellow">Yellow</option>
+				<option value="Green">Green</option>
+				<option value="Pink">Pink</option>
+				<option value="White">White</option>
+			</select>
+		</div>
+
+		<p style="font: 18px; color: black">Logo Speed</p>
+		<div id="speed" class="set">
+			<input id="slow" name="speed" type="radio"><label>slow</label><br>
+			<input id="medium" name="speed" type="radio"><label>medium</label><br>
+			<input id="fast" name="speed" type="radio"><label>fast</label>
+		</div>
+
+		<p style="font: 18px; color: black">Refresh Rate</p>
+		<div id="rate" class="set">
+			<input id="classic" name="rate" type="radio"><label>classic (25 fps)</label><br>
+			<input id="smooth" name="rate" type="radio"><label>smooth (50 fps)</label>
+		</div>
+
+		<p style="font: 18px; color: black">Statistics</p>
+		<div id="stats" class="set">
+			<input id="on" name="stats" type="radio"><label>on</label><br>
+			<input id="off" name="stats" type="radio"><label>off</label>
+		</div><br>
+		<a id="back" onclick="teleport(this)">back</a>
+	</div>
+
+	<script src="opt.js"></script>
 </body>
+
 </html>
